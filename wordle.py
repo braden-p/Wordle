@@ -48,6 +48,23 @@ def checkWord(guess, wordsize, status, choice):
     In addition to scoring a point, updates the corresponding letter space in status to a 1
     RETURNS: score, an int
     '''
+    score = 0
+    guessIndex = 0
+    for letter in guess:
+        choiceIndex = 0
+        for letter in choice:
+            if guess[guessIndex] == choice[guessIndex]:
+                score += 2
+                status[guessIndex] = 2
+                break
+            elif guess[guessIndex] == choice[choiceIndex]:
+                score += 1
+                status[guessIndex] = 1
+            choiceIndex += 1
+        guessIndex += 1
+    return score
+
+
 
 
 def printWord(guess, wordsize, status):
