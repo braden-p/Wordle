@@ -37,7 +37,6 @@ def getGuess (wordlength):
     return guess
         
 
-
 def checkWord(guess, wordsize, status, choice):
     '''
     Compares the user's guess to the choice word and scores points as appropriate
@@ -64,13 +63,30 @@ def checkWord(guess, wordsize, status, choice):
         guessIndex += 1
     return score
 
+def colorText(character, colorCode):
+    '''
+    Accepts a character, and a colorCode (an int)
+    Prints the character with the corresponding colorCode background
+    valid colorCodes: 0 = Red, 1 = Yellow, 2 = Green
+    Resets background color to normal
+    '''
+    if colorCode == 0:
+        print('\u001b[41m' + character + '\u001b[0m', end = '')
+    elif colorCode == 1:
+        print('\u001b[43;1m' + character + '\u001b[0m', end = '')
+    else:
+        print('\u001b[42;1m' + character + '\u001b[0m', end = '')
 
 
-
-def printWord(guess, wordsize, status):
+def printWord(guess, status):
     '''
     print word character for character with correct color coding
     '''
+    index = 0
+    for colorCode in status:
+        colorText(guess[index], colorCode)
+        index += 1
+    print('')
 
 # Startup Message
 print("Welcome to Wordle.")
