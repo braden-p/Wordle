@@ -26,6 +26,16 @@ def getGuess (wordlength):
     Prompts the user to type their answer, and only accepts the correct-length word
     RETURNS: the user's guess, a string
     '''
+    validGuess = False
+    while validGuess == False:
+        print('Type a', wordlength, 'letter word.')
+        guess = input()
+        if len(guess) == wordlength:
+            validGuess = True
+        else:
+            print('Please enter a word with exactly', wordlength, 'letters.')
+    return guess
+        
 
 
 def checkWord(guess, wordsize, status, choice):
