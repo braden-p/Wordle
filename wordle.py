@@ -1,3 +1,5 @@
+import random
+
 # Import text files as lists
 file_5 = open('5.txt', 'r')
 words5 = file_5.read()
@@ -37,7 +39,7 @@ def getGuess (wordlength):
     return guess
         
 
-def checkWord(guess, wordsize, status, choice):
+def checkWord(guess, status, choice):
     '''
     Compares the user's guess to the choice word and scores points as appropriate
     Stores points in status
@@ -90,28 +92,51 @@ def printWord(guess, status):
 
 # Startup Message
 print("Welcome to Wordle.")
-# Outer Game Loop
 
-    # Ask player for length of word to play
-wordlength = input('What length word would you like to play, 5, 6, 7, or 8 letters?')
+# Ask player for length of word to play
+wordlength = 0
+while wordlength != 5 or 6 or 7 or 8:
+    wordlength = int(input('What length word would you like to play; 5, 6, 7, or 8 letters? '))
+    # Choose a word at random from the appropriate list = choice
+    if wordlength == 5:
+        choice = random.choice(wordslist5)
+        break
+    elif wordlength == 6:
+        choice = random.choice(wordslist6)
+        break
+    elif wordlength == 7:
+        choice = random.choice(wordslist7)
+        break
+    elif wordlength == 8:
+        choice = random.choice(wordslist8)
+        break
+    else:
+        print('Invalid input. Please type 5, 6, 7, or 8.')
 
-    # Choose a word at random from the appropriate list - choice
-
-    # Allow one more guess than the length of the word
+# Allow one more guess than the length of the word
+guesses = wordlength + 1
 won = False
+# Main Game Loop
+for numGuesses in range(guesses):
+    # Get the user's guess
+    guess = getGuess(wordlength)
+    status = []
+    for letter in range(wordlength):
+        status.append(0)
+    score = checkWord(guess, status, choice)
+    printWord(guess, status)
+    # if user guessed exactly right, set won var to true, and break
+    if score == 2 * wordlength:
+        won = True
+        break
 
-    # Main Game Loop
-        # for wordlength +1 times
-            # Get the user's guess
-        # create a list, status, the length of the word, with each index representing the guess status
-        # set each item in the list to 0
-        # calculate score for the guess - checkWord func
-        # print the guess - printWord func
-        # if user guessed exactly right, set won var to true, and break
+# Print the game's result
+if won == True:
+    print('You won!')
+else:
+    print('Better luck next time. The word was', choice)
 
-    # Print the game's result
-
-    # Ask user if they want to play again or quit
+# Ask user if they want to play again or quit
 
 
 
