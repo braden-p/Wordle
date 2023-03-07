@@ -118,6 +118,7 @@ guesses = wordlength + 1
 won = False
 # Main Game Loop
 for numGuesses in range(guesses):
+    print(guesses, 'guesses left.')
     # Get the user's guess
     guess = getGuess(wordlength)
     status = []
@@ -125,6 +126,7 @@ for numGuesses in range(guesses):
         status.append(0)
     score = checkWord(guess, status, choice)
     printWord(guess, status)
+    guesses -= 1
     # if user guessed exactly right, set won var to true, and break
     if score == 2 * wordlength:
         won = True
