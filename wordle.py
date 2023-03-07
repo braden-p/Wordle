@@ -136,14 +136,8 @@ if won == True:
 else:
     print('Better luck next time. The word was', choice)
 
-# Ask user if they want to play again or quit
 
-
-
-
-
-
-
-
-
-# RESEARCH HOW TO PRINT COLOR
+# TODO
+# Add a "Guesses Left" tracker, so the player knows how many guesses they have left
+# Implement replayability
+# Add a guessed letters fetaures that displays which letters have been guessed already
