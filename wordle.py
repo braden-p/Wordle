@@ -32,10 +32,12 @@ def getGuess (wordlength):
     while validGuess == False:
         print('Type a', wordlength, 'letter word.')
         guess = input().lower()
-        if len(guess) == wordlength:
+        if len(guess) == wordlength and guess.isalpha():
             validGuess = True
-        else:
+        elif len(guess) != wordlength:
             print('Please enter a word with exactly', wordlength, 'letters.')
+        else:
+            print('Please enter only letters.')
     return guess
         
 
