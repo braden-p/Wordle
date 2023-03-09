@@ -31,7 +31,7 @@ def getGuess (wordlength):
     validGuess = False
     while validGuess == False:
         print('Type a', wordlength, 'letter word.')
-        guess = input()
+        guess = input().lower()
         if len(guess) == wordlength:
             validGuess = True
         else:
@@ -90,6 +90,55 @@ def printWord(guess, status):
         index += 1
     print('')
 
+
+def print_alphabet(guess, status, guesses):
+    # Add the current guess and status to the list of guesses
+    guesses.append((guess, status))
+    
+    # Create a set of all the letters that have been guessed
+    guessed_letters = set([g[0][i] for g in guesses for i in range(len(g[0]))])
+    
+    # Create a list of letters with their corresponding color
+    letters = []
+    for letter in 'abcdefghijklmnopqrstuvwxyz':
+        if letter not in guessed_letters:
+            # Letter not guessed yet
+            letters.append((letter, None))
+        else:
+            # Letter guessed
+            found = False
+            for g in guesses:
+                if letter in g[0]:
+                    if g[1][g[0].index(letter)] == 2:
+                        # Letter in correct position
+                        letters.append((letter, 'green'))
+                        found = True
+                        break
+                    elif g[1][g[0].index(letter)] == 1:
+                        # Letter in wrong position
+                        letters.append((letter, 'yellow'))
+                        found = True
+                        break
+            if not found:
+                # Letter not in word
+                letters.append((letter, 'red'))
+    
+    # Print the alphabet with the appropriate colors
+    for letter, color in letters:
+        if color is None:
+            print(letter, end=' ')
+        elif color == 'red':
+            #print(f"\033[91m{letter}\033[0m", end=' ')
+            print('\u001b[41m' + letter + '\u001b[0m', end = ' ')
+        elif color == 'yellow':
+            #print(f"\033[93m{letter}\033[0m", end=' ')
+            print('\u001b[43;1m' + letter + '\u001b[0m', end = ' ')
+        elif color == 'green':
+            #print(f"\033[92m{letter}\033[0m", end=' ')
+            print('\u001b[42;1m' + letter + '\u001b[0m', end = ' ')
+    print()
+
+
 # Startup Message
 print("Welcome to Wordle.")
 
@@ -116,6 +165,7 @@ while wordlength != 5 or 6 or 7 or 8:
 # Allow one more guess than the length of the word
 guesses = wordlength + 1
 won = False
+prevGuesses = []
 # Main Game Loop
 for numGuesses in range(guesses):
     print(guesses, 'guesses left.')
@@ -126,6 +176,7 @@ for numGuesses in range(guesses):
         status.append(0)
     score = checkWord(guess, status, choice)
     printWord(guess, status)
+    print_alphabet(guess, status, prevGuesses)
     guesses -= 1
     # if user guessed exactly right, set won var to true, and break
     if score == 2 * wordlength:
@@ -140,6 +191,5 @@ else:
 
 
 # TODO
-# Add a "Guesses Left" tracker, so the player knows how many guesses they have left
 # Implement replayability
-# Add a guessed letters fetaures that displays which letters have been guessed already
+# Add a guessed letters feature that displays which letters have been guessed already
