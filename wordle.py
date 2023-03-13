@@ -1,3 +1,5 @@
+
+
 import random
 
 # Import text files as lists
@@ -57,14 +59,13 @@ def checkWord(guess, status, choice):
         choiceIndex = 0
         for letter in choice:
             if guess[guessIndex] == choice[guessIndex]:
-                score += 2
                 status[guessIndex] = 2
                 break
             elif guess[guessIndex] == choice[choiceIndex]:
-                score += 1
                 status[guessIndex] = 1
             choiceIndex += 1
         guessIndex += 1
+    score = sum(status)
     return score
 
 def colorText(character, colorCode):
@@ -181,7 +182,7 @@ for numGuesses in range(guesses):
     print_alphabet(guess, status, prevGuesses)
     guesses -= 1
     # if user guessed exactly right, set won var to true, and break
-    if score == 2 * wordlength:
+    if score == (2 * wordlength):
         won = True
         break
 
@@ -194,4 +195,3 @@ else:
 
 # TODO
 # Implement replayability
-# Add a guessed letters feature that displays which letters have been guessed already
