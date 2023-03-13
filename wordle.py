@@ -1,4 +1,22 @@
-
+"""
+Wordle Copy
+Created by Braden Piper, bradenpiper.com
+Created on Mon March 13, 2022
+Version = 1.0
+------------------------------------------
+DESCRIPTION:
+A copy of the popular game, Wordle, written in Python.
+In this version, the user can choose the length of the word ranging from
+5 to 8 letters words. The user has a set number of guesses to guess the
+correct word.
+Unlike the original wordle game, this version does not check if the user
+input is a real word.
+------------------------------------------
+NOTE: Some of the structure of this program was inspired by an outline
+of this program provided by CS50, Introduction to Computer Science. The
+original program was completed in C, but this version in Python has more
+features.
+"""
 
 import random
 
@@ -191,7 +209,3 @@ if won == True:
     print('You won!')
 else:
     print('Better luck next time. The word was', choice)
-
-
-# TODO
-# Implement replayability
